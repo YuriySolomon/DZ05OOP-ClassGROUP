@@ -1,24 +1,24 @@
 #include "GROUP.h"
 
-GROUP::GROUP() : GROUP(1)
+GROUP::GROUP() : GROUP(0)
 {
-	cout << "C-TOR \n";
+	//cout << "C-TOR \n";
 }
 GROUP::GROUP(unsigned int GroupCount)
 {
-	cout << "C-TOR Par\n";
+	//cout << "C-TOR Par\n";
 	SetGroupCount(GroupCount);
-	/*SetGroupName(GroupName);
-	SetGroupDirection(GroupDirection);
-	SetGroupCourse(GroupCourse)*/;
+	SetGroupName("SPU");
+	SetGroupDirection("Programmer");
+	SetGroupCourse(1);
 }
+
 GROUP::GROUP(const GROUP& original)
 {
 	cout << "C-TOR Copy\n";
 }
 GROUP::~GROUP()
 {
-	cout << "D-TOR \n";
 	if (student != nullptr) delete[] student;
 	if (GroupDirection != nullptr) delete[] GroupDirection;
 	if (GroupName != nullptr) delete[] GroupName;
@@ -39,7 +39,6 @@ void GROUP::SetGroupName(const char* GroupName)
 		throw "You did not enter a group name\n";
 	}
 	int size = strlen(GroupName);
-	//cout << "size = " << size << "\n";
 	delete[] this->GroupName;
 	this->GroupName = new char[++size];
 	strcpy_s(this->GroupName, size, GroupName);
@@ -57,7 +56,7 @@ void GROUP::SetGroupDirection(const char* GroupDirection)
 }
 void GROUP::SetGroupCourse(unsigned int GroupCourse)
 {
-	if (GroupCourse < 0 || GroupCourse > 1000)
+	if (GroupCourse < 0 || GroupCourse > 6)
 	{
 		throw "Incorrect course number entered";
 	}
@@ -83,20 +82,45 @@ unsigned int GROUP::GetGroupCourse() const
 
 void GROUP::ShowGroup()
 {
-	cout << GetGroupCount() << "\n";
-	/*cout << GetGroupName() << "\n";
-	cout << GetGroupDirection() << "\n";
-	cout << GetGroupCourse() << "\n";*/
+	cout << "Group: " << GetGroupName() << "\n";
+	cout << "Direction: " << GetGroupDirection() << "\n";
+	if (GroupCount != 0)
+	{
+		cout << "\nStudents in a group: \n";
+	}
+	for (int i = 0; i < GroupCount; i++)
+	{
+		cout  << (i + 1) << " - " << student[i]->GetSurname() << " " << student[i]->GetName() << "\n";
+	}
+	
 }
 
-void GROUP::PushStudent()
-{
-	GroupCount++;
-	Student** temp = new Student * [GroupCount];
+void GROUP::PushStudent(Student* s)
+{	
+	Student** temp = new Student * [GroupCount + 1];
 	for (int i = 0; i < GroupCount; i++)
 	{
 		temp[i] = student[i];
 	}
-	//Student* stud = new Student();
+	temp[GroupCount] = s;
+	delete[] student;
+	student = temp;
+	GroupCount++;
+}
 
+void GROUP::SortStudent()
+{
+	Student** temp = new Student * [GroupCount];
+	for (int i = 0; i < GroupCount - 1; i++)
+	{
+		for (int j = 0; j < GroupCount - i - 1; j++)
+		{
+			if (student[j]->GetSurname() > student[j + 1]->GetSurname())
+			{
+				temp[j] = student[j];
+				student[j] = student[j + 1];
+				student[j + 1] = temp[j];
+			}
+		}		
+	}
 }

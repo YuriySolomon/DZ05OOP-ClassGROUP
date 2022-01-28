@@ -165,26 +165,35 @@ string Student::GetPhone() const
 
 void Student::GetZachot() 
 {
-	for (int i = 0; i < zachot_count; i++)
+	if (zachot_count != 0)
 	{
-		cout << zachot[i] << ", ";
-	}
+		for (int i = 0; i < zachot_count; i++)
+		{
+			cout << zachot[i] << ", ";
+		}
+	}	
 }
 
 void Student::GetKursach() 
 {
-	for (int i = 0; i < kursach_count; i++)
+	if (kursach_count != 0)
 	{
-		cout << kursach[i] << ", ";
-	}
+		for (int i = 0; i < kursach_count; i++)
+		{
+			cout << kursach[i] << ", ";
+		}
+	}	
 }
 
 void Student::GetExams() 
 {
-	for (int i = 0; i < exams_count; i++)
+	if (exams_count != 0)
 	{
-		cout << exams[i] << ", ";
-	}
+		for (int i = 0; i < exams_count; i++)
+		{
+			cout << exams[i] << ", ";
+		}
+	}	
 }
 
 void Student::ShowStudent() 

@@ -9,7 +9,7 @@ class GROUP
 	unsigned int GroupCount = 0; // number of students in a group
 	char* GroupName = nullptr; // group name
 	char* GroupDirection = nullptr; // group specialization
-	unsigned int GroupCourse = 1; // course number
+	unsigned int GroupCourse = 101; // course number
 
 public:
 	GROUP(); // К-ТОР по умолчанию
@@ -28,6 +28,6 @@ public:
 	unsigned int GetGroupCourse() const; // Geter to output course number
 
 	void ShowGroup(); // Show all students in a group
-	void PushStudent(); // Adding a student to a group
-
+	void PushStudent(Student* s); // Adding a student to a group
+	void SortStudent(); // Sorting students by last name
 };
