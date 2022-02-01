@@ -2,20 +2,32 @@
 
 GROUP::GROUP() : GROUP(0)
 {
-	//cout << "C-TOR \n";
 }
 GROUP::GROUP(unsigned int GroupCount)
 {
-	//cout << "C-TOR Par\n";
 	SetGroupCount(GroupCount);
 	SetGroupName("SPU");
 	SetGroupDirection("Programmer");
-	SetGroupCourse(1);
+	SetGroupCourse(1);	
+	for (int i = 0; i < GroupCount; i++)
+	{
+		//cout << "The developer thinks over the logic of the algorithm.\n";
+	}
 }
 
 GROUP::GROUP(const GROUP& original)
 {
-	cout << "C-TOR Copy\n";
+	SetGroupCount(original.GroupCount);
+	SetGroupName(original.GroupName);
+	SetGroupDirection(original.GroupDirection);
+	SetGroupCourse(original.GroupCourse);
+	Student** temp = new Student * [original.GroupCount];
+	for (int i = 0; i < GroupCount; i++)
+	{
+		temp[i] = original.student[i];
+	}
+	delete[] student;
+	student = temp;
 }
 GROUP::~GROUP()
 {
@@ -82,6 +94,11 @@ unsigned int GROUP::GetGroupCourse() const
 
 void GROUP::ShowGroup()
 {
+	if (GroupCount == 0)
+	{
+		cout << "Group " << GetGroupName() << " is empty\n";
+		return;
+	}
 	cout << "Group: " << GetGroupName() << "\n";
 	cout << "Direction: " << GetGroupDirection() << "\n";
 	if (GroupCount != 0)
@@ -108,6 +125,30 @@ void GROUP::PushStudent(Student* s)
 	GroupCount++;
 }
 
+void GROUP::RemoveStudent(Student* s)
+{
+	Student** temp = new Student * [GroupCount - 1];
+	bool k = true;
+	for (int i = 0; i < GroupCount; i++)
+	{
+		if (student[i] == s)
+		{
+			k = false;
+		}
+		else if (k)
+		{
+			temp[i] = student[i];
+		}
+		else
+		{
+			temp[i - 1] = student[i];
+		}
+	}
+	delete[] student;
+	student = temp;
+	GroupCount--;
+}
+
 void GROUP::SortStudent()
 {
 	Student** temp = new Student * [GroupCount];
@@ -123,4 +164,108 @@ void GROUP::SortStudent()
 			}
 		}		
 	}
+}
+
+void GROUP::TransferStudent(Student* s, GROUP* g)
+{
+	Student** temp_rem = new Student * [GroupCount - 1];
+	Student** temp_add = new Student * [g->GetGroupCount() + 1];
+	bool k = true;
+	for (int i = 0; i < GroupCount; i++)
+	{
+		if (student[i] == s) // if (student[i]->GetSurname() == s->GetSurname())
+		{
+			for (int j = 0; j < g->GetGroupCount(); j++)
+			{
+				temp_add[j] = g->student[j];
+			}
+			temp_add[g->GetGroupCount()] = s;
+			k = false;
+		}
+		else if (k)
+		{
+			temp_rem[i] = student[i];
+		}
+		else
+		{
+			temp_rem[i - 1] = student[i];
+		}
+	}
+	delete[] g->student;
+	g->student = temp_add;
+	g->SetGroupCount(g->GetGroupCount() + 1);
+	delete[] student;
+	student = temp_rem;
+	GroupCount--;	
+}
+
+void GROUP::MergingGroup(GROUP* g)
+{
+	Student** temp = new Student * [GroupCount + g->GetGroupCount()];
+	int j = 0;
+	for (int i = 0; i < (GroupCount + g->GetGroupCount()); i++)
+	{
+		if (i < GroupCount)
+		{
+			temp[i] = student[i];
+		}
+		else 
+		{
+			temp[i] = g->student[j];
+			j++;
+		}		
+	}
+	delete[] student;
+	student = temp;
+	GroupCount += g->GetGroupCount();
+	g->SetGroupCount(0);
+}
+
+void GROUP::ExpulsionStudent()
+{
+	int num = 0;
+	double grade = 0;
+	grade = (student[0]->AverageZachetScore() + student[0]->AverageKursachScore() + student[0]->AverageExamsScore()) / 3;
+	for (int i = 1; i < GroupCount; i++)
+	{
+		if (grade > (student[i]->AverageZachetScore() + student[i]->AverageKursachScore() + student[i]->AverageExamsScore()) / 3)
+		{
+			grade = (student[i]->AverageZachetScore() + student[i]->AverageKursachScore() + student[i]->AverageExamsScore()) / 3;
+			num = i;
+		}
+	}
+	RemoveStudent(student[num]);
+}
+
+int GROUP::NumberDebtorsExam()
+{
+	int kol = 0;
+	for (int i = 0; i < GroupCount; i++)
+	{
+		if (student[i]->DebtorExam() == 1)
+		{
+			kol++;
+		}
+	}
+	return kol;
+}
+
+void GROUP::ExpulsionAllStudent()
+{
+	Student** temp = new Student * [GroupCount - NumberDebtorsExam()];
+	int j = 0;
+	for (int i = 0; i < GroupCount; i++)
+	{		
+		if (student[i]->DebtorExam() == true)
+		{
+			j++;
+		}
+		else
+		{
+			temp[i - j] = student[i];
+		}
+	}
+	delete[] student;
+	student = temp;
+	GroupCount -= j;	
 }

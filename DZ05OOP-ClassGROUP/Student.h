@@ -44,5 +44,9 @@ public:
 	void GetKursach(); // Shows course grades
 	void GetExams(); // Shows grades for exams
 	void ShowStudent(); // Showing all fields of the student object
+	bool DebtorExam(); // Return true if there is a debt for at least one exam
+	double AverageZachetScore(); // Average score for credits
+	double AverageKursachScore(); // Average score for coursework
+	double AverageExamsScore(); // Average score for exams
 };
 

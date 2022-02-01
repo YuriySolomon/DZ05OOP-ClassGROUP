@@ -29,5 +29,11 @@ public:
 
 	void ShowGroup(); // Show all students in a group
 	void PushStudent(Student* s); // Adding a student to a group
+	void RemoveStudent(Student* s); // Removing a student from a group
 	void SortStudent(); // Sorting students by last name
+	void TransferStudent(Student* s, GROUP* g); // Transfer of a student from one group to another
+	void MergingGroup(GROUP* g); // Merging groups
+	void ExpulsionStudent(); // Expulsions from one of the most underperforming students
+	void ExpulsionAllStudent(); // Expulsion of all students who did not pass the exam
+	int NumberDebtorsExam(); // Number of students who failed the exam
 };

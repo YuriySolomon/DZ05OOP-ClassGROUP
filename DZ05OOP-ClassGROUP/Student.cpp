@@ -171,7 +171,12 @@ void Student::GetZachot()
 		{
 			cout << zachot[i] << ", ";
 		}
+		cout << "\n";
 	}	
+	else
+	{
+		cout << "The student " << surname << " " << name << " has not passed any tests yet\n";
+	}
 }
 
 void Student::GetKursach() 
@@ -182,7 +187,12 @@ void Student::GetKursach()
 		{
 			cout << kursach[i] << ", ";
 		}
+		cout << "\n";
 	}	
+	else
+	{
+		cout << "The student " << surname << " " << name << " has not yet received any marks for the course\n";
+	}
 }
 
 void Student::GetExams() 
@@ -193,7 +203,12 @@ void Student::GetExams()
 		{
 			cout << exams[i] << ", ";
 		}
-	}	
+		cout << "\n";
+	}
+	else
+	{
+		cout << "The student " << surname << " " << name << " does not have any grades for the exam yet\n";
+	}
 }
 
 void Student::ShowStudent() 
@@ -211,4 +226,72 @@ void Student::ShowStudent()
 	cout << "\n";
 	GetExams();
 	cout << "\n";
+}
+
+bool Student::DebtorExam()
+{
+	if (exams_count != 0)
+	{
+		for (int i = 0; i < exams_count; i++)
+		{
+			if (exams[i] == 0)
+			{
+				return true;
+			}
+		}
+	}
+	else
+	{
+		cout << "The student " << surname << " " << name << " does not have any grades for the exam yet\n";
+	}
+	return false;
+}
+
+double Student::AverageZachetScore()
+{
+	double sum = 0;
+	if (zachot_count != 0)
+	{
+		for (int i = 0; i < zachot_count; i++)
+		{
+			sum += zachot[i];
+		}
+		return (sum / zachot_count);
+	}
+	else
+	{
+		return 0;
+	}
+}
+double Student::AverageKursachScore()
+{
+	double sum = 0;
+	if (kursach_count != 0)
+	{
+		for (int i = 0; i < kursach_count; i++)
+		{
+			sum += kursach[i];
+		}
+		return (sum / kursach_count);
+	}
+	else
+	{
+		return 0;
+	}
+}
+double Student::AverageExamsScore()
+{
+	double sum = 0;
+	if (exams_count != 0)
+	{
+		for (int i = 0; i < exams_count; i++)
+		{
+			sum += exams[i];
+		}
+		return (sum / exams_count);
+	}
+	else
+	{
+		return 0;
+	}
 }
