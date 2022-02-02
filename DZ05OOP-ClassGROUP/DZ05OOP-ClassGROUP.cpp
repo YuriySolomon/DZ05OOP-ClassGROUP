@@ -35,8 +35,12 @@ int main()
 	/*GROUP g3(g1);
 	g3.ShowGroup();*/
 
-	/*GROUP g4(2);
-	g4.ShowGroup();*/
+	GROUP g4(5);
+	g4.ShowGroup();
+
+	g2.MergingGroup(&g4);
+	g2.SortStudent();
+	g2.ShowGroup();
 
 	/*s1.SetZachot(8);
 	s1.SetZachot(9);

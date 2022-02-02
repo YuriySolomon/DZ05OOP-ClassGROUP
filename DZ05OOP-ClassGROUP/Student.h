@@ -48,5 +48,8 @@ public:
 	double AverageZachetScore(); // Average score for credits
 	double AverageKursachScore(); // Average score for coursework
 	double AverageExamsScore(); // Average score for exams
+	void RandName(); // Random student name generation
+	void RandSurname(); // Random student last name generation
+	void RandPhone(); // Random student phone number generation
 };
 

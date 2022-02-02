@@ -1,5 +1,6 @@
 #include "GROUP.h"
 
+
 GROUP::GROUP() : GROUP(0)
 {
 }
@@ -8,10 +9,15 @@ GROUP::GROUP(unsigned int GroupCount)
 	SetGroupCount(GroupCount);
 	SetGroupName("SPU");
 	SetGroupDirection("Programmer");
-	SetGroupCourse(1);	
+	SetGroupCourse(1);
+	srand(time(0));
+	student = new Student * [GroupCount];
 	for (int i = 0; i < GroupCount; i++)
 	{
-		//cout << "The developer thinks over the logic of the algorithm.\n";
+		student[i] = new Student();
+		student[i]->RandName();
+		student[i]->RandSurname();
+		student[i]->RandPhone();
 	}
 }
 

@@ -8,16 +8,16 @@ Student::Student(const char* name, const char* surname, const char* otchestvo, c
 {
 	SetName(name);
 	SetSurname(surname);
-	SetOtchestvo(otchestvo);	
+	SetOtchestvo(otchestvo);
 	SetAddress(address);
-	SetPhone(phone);	
+	SetPhone(phone);
 }
 
 Student::Student(const Student& original)
 {
 	SetName(original.name);
 	SetSurname(original.surname);
-	SetOtchestvo(original.otchestvo);	
+	SetOtchestvo(original.otchestvo);
 	SetAddress(original.address);
 	SetPhone(original.phone);
 }
@@ -32,7 +32,7 @@ Student::~Student()
 	if (zachot != nullptr) delete[] zachot;
 }
 
-void Student::SetName(const char* name) 
+void Student::SetName(const char* name)
 {
 	if (strlen(name) == 0)
 	{
@@ -43,7 +43,7 @@ void Student::SetName(const char* name)
 	strcpy_s(this->name, size - 1, name);
 }
 
-void Student::SetSurname(const char* surname) 
+void Student::SetSurname(const char* surname)
 {
 	if (strlen(surname) == 0)
 	{
@@ -65,14 +65,14 @@ void Student::SetOtchestvo(const char* otchestvo)
 	strcpy_s(this->otchestvo, size - 1, otchestvo);
 }
 
-void Student::SetBirthday(short day, short month, short year) 
+void Student::SetBirthday(short day, short month, short year)
 {
 	birthday.SetDay(day);
 	birthday.SetMonth(month);
 	birthday.SetYear(year);
 }
 
-void Student::SetAddress(const char* address) 
+void Student::SetAddress(const char* address)
 {
 	if (strlen(address) == 0)
 	{
@@ -83,7 +83,7 @@ void Student::SetAddress(const char* address)
 	strcpy_s(this->address, size - 1, address);
 }
 
-void Student::SetPhone(const char* phone) 
+void Student::SetPhone(const char* phone)
 {
 	if (strlen(phone) == 0)
 	{
@@ -94,7 +94,7 @@ void Student::SetPhone(const char* phone)
 	strcpy_s(this->phone, size - 1, phone);
 }
 
-void Student::SetZachot(const short grade) 
+void Student::SetZachot(const short grade)
 {
 	short* temp = new short[zachot_count + 1];
 	for (int i = 0; i < zachot_count; i++)
@@ -104,10 +104,10 @@ void Student::SetZachot(const short grade)
 	temp[zachot_count] = grade;
 	delete[] zachot;
 	zachot = temp;
-	zachot_count++;	
+	zachot_count++;
 }
 
-void Student::SetKursach(const short grade) 
+void Student::SetKursach(const short grade)
 {
 	short* temp = new short[kursach_count + 1];
 	for (int i = 0; i < kursach_count; i++)
@@ -118,9 +118,9 @@ void Student::SetKursach(const short grade)
 	delete[] kursach;
 	kursach = temp;
 	kursach_count++;
-} 
+}
 
-void Student::SetExams(const short grade) 
+void Student::SetExams(const short grade)
 {
 	short* temp = new short[exams_count + 1];
 	for (int i = 0; i < exams_count; i++)
@@ -133,37 +133,37 @@ void Student::SetExams(const short grade)
 	exams_count++;
 }
 
-string Student::GetName() const 
+string Student::GetName() const
 {
 	return name;
 }
 
-string Student::GetSurname() const 
+string Student::GetSurname() const
 {
 	return surname;
 }
 
-string Student::GetOtchestvo() const 
+string Student::GetOtchestvo() const
 {
 	return otchestvo;
 }
 
-void Student::GetBirthday() const 
+void Student::GetBirthday() const
 {
 	cout << birthday.GetDate() << ":" << birthday.GetMonth() << ":" << birthday.GetYear();
 }
 
-string Student::GetAddress() const 
+string Student::GetAddress() const
 {
 	return address;
 }
 
-string Student::GetPhone() const 
+string Student::GetPhone() const
 {
 	return phone;
 }
 
-void Student::GetZachot() 
+void Student::GetZachot()
 {
 	if (zachot_count != 0)
 	{
@@ -172,14 +172,14 @@ void Student::GetZachot()
 			cout << zachot[i] << ", ";
 		}
 		cout << "\n";
-	}	
+	}
 	else
 	{
 		cout << "The student " << surname << " " << name << " has not passed any tests yet\n";
 	}
 }
 
-void Student::GetKursach() 
+void Student::GetKursach()
 {
 	if (kursach_count != 0)
 	{
@@ -188,14 +188,14 @@ void Student::GetKursach()
 			cout << kursach[i] << ", ";
 		}
 		cout << "\n";
-	}	
+	}
 	else
 	{
 		cout << "The student " << surname << " " << name << " has not yet received any marks for the course\n";
 	}
 }
 
-void Student::GetExams() 
+void Student::GetExams()
 {
 	if (exams_count != 0)
 	{
@@ -211,7 +211,7 @@ void Student::GetExams()
 	}
 }
 
-void Student::ShowStudent() 
+void Student::ShowStudent()
 {
 	cout << GetName() << "\n";
 	cout << GetSurname() << "\n";
@@ -293,5 +293,114 @@ double Student::AverageExamsScore()
 	else
 	{
 		return 0;
+	}
+}
+
+void Student::RandName()
+{
+	switch (rand() % 10)
+	{
+	case 1: 
+		strcpy_s(name, size - 1, "Anna");
+		break;
+	case 2: 
+		strcpy_s(name, size - 1, "Valentina");
+		break;
+	case 3: 
+		strcpy_s(name, size - 1, "Viktiria");
+		break;
+	case 4: 
+		strcpy_s(name, size - 1, "Taras");
+		break;
+	case 5: 
+		strcpy_s(name, size - 1, "Nikadim");
+		break;
+	case 6: 
+		strcpy_s(name, size - 1, "Petr");
+		break;
+	case 7: 
+		strcpy_s(name, size - 1, "Elena");
+		break;
+	case 8: 
+		strcpy_s(name, size - 1, "Ivan");
+		break;
+	case 9: 
+		strcpy_s(name, size - 1, "Nikolay");
+		break;
+	default: 
+		strcpy_s(name, size - 1, "Sergei");
+		break;
+	}
+}
+void Student::RandSurname()
+{
+	switch (rand() % 10)
+	{
+	case 1:
+		strcpy_s(surname, size - 1, "Didenko");
+		break;
+	case 2:
+		strcpy_s(surname, size - 1, "Romanenko");
+		break;
+	case 3:
+		strcpy_s(surname, size - 1, "Mioglo");
+		break;
+	case 4:
+		strcpy_s(surname, size - 1, "Omelchenko");
+		break;
+	case 5:
+		strcpy_s(surname, size - 1, "Ptrichenko");
+		break;
+	case 6:
+		strcpy_s(surname, size - 1, "Lupu");
+		break;
+	case 7:
+		strcpy_s(surname, size - 1, "Solomon");
+		break;
+	case 8:
+		strcpy_s(surname, size - 1, "Brandner");
+		break;
+	case 9:
+		strcpy_s(surname, size - 1, "Pershko");
+		break;
+	default:
+		strcpy_s(surname, size - 1, "Rodenko");
+		break;
+	}
+}
+void Student::RandPhone()
+{
+	switch (rand() % 10)
+	{
+	case 1:
+		strcpy_s(phone, size - 1, "+38 (097) 321-12-45");
+		break;
+	case 2:
+		strcpy_s(phone, size - 1, "+38 (096) 321-78-89");
+		break;
+	case 3:
+		strcpy_s(phone, size - 1, "+38 (098) 123-87-54");
+		break;
+	case 4:
+		strcpy_s(phone, size - 1, "+38 (050) 159-69-52");
+		break;
+	case 5:
+		strcpy_s(phone, size - 1, "+38 (066) 789-74-85");
+		break;
+	case 6:
+		strcpy_s(phone, size - 1, "+38 (093) 258-45-45");
+		break;
+	case 7:
+		strcpy_s(phone, size - 1, "+38 (091) 753-45-65");
+		break;
+	case 8:
+		strcpy_s(phone, size - 1, "+38 (097) 785-12-45");
+		break;
+	case 9:
+		strcpy_s(phone, size - 1, "+38 (096) 369-78-25");
+		break;
+	default:
+		strcpy_s(phone, size - 1, "+38 (050) 753-42-78");
+		break;
 	}
 }
